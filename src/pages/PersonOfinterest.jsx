@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import DataTable from "../components/Table";
 import { thead } from "../sections/quickAccess/personOfInterest/tableData";
 import AddPersonModal from "../sections/quickAccess/personOfInterest/AddPersonModal";
 import { useDispatch, useSelector } from "react-redux";
 import { deletePerson } from "../store/personSlice";
+import { Searchbox } from "../components/Searchbox";
 
 const PersonOfInterest = () => {
   const [openModal, setOpenModal] = useState(false);
   const [editModalId, setEditModalId] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
+  const [search, setSearch] = useState("");
 
   const dispatch = useDispatch();
 
@@ -35,6 +37,18 @@ const PersonOfInterest = () => {
     setSelectedId(id);
     setShowDeleteModal(true);
   };
+
+  const filteredPersons = useMemo(() => {
+    if (!search.trim()) return persons;
+
+    const query = search.toLowerCase();
+
+    return persons.filter((person) =>
+      Object.values(person).some((value) =>
+        String(value).toLowerCase().includes(query),
+      ),
+    );
+  }, [persons, search]);
 
   return (
     <>
@@ -72,18 +86,20 @@ const PersonOfInterest = () => {
 
       <div className="align-center relative mb-2 mt-3 flex justify-center">
         <div className="mt-16 w-screen px-3 md:px-9 lg:px-12">
-          <AddPersonModal
-            handleCloseModal={handleCloseModal}
-            openEditModal={openModal}
-            editModalId={editModalId}
-          />
+          <div className="flex items-center justify-between">
+            <Searchbox search={search} setSearch={setSearch} />
+
+            <AddPersonModal
+              handleCloseModal={handleCloseModal}
+              openEditModal={openModal}
+              editModalId={editModalId}
+            />
+          </div>
 
           <DataTable
             thead={thead}
-            tbody={persons}
+            tbody={filteredPersons}
             headerHeight="350"
-            sortBy={"asc"}
-            sortOrder={"fullName"}
             openEditModal={(id) => handleOpenModal(id)}
             deleteRow={handleDelete}
           />

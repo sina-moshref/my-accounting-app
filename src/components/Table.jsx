@@ -98,7 +98,7 @@ const StyledTableRow = styled(TableRow, {
 export default function DataTable({
   thead,
   tbody,
-  loading = true,
+  loading = false,
   dense = false,
   sortBy,
   sortOrder,
