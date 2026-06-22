@@ -105,7 +105,7 @@ export default function AddPersonModal({
   };
   return (
     <>
-      <div className="mb-6 flex justify-end">
+      <div className="flex justify-end">
         <button
           onClick={() => setOpenModal(true)}
           className="flex items-center gap-2 rounded-2xl bg-indigo-600 px-5 py-3 text-sm font-medium text-white shadow-lg shadow-indigo-500/20 transition-all duration-300 hover:scale-[1.02] hover:bg-indigo-500 dark:bg-indigo-500 dark:hover:bg-indigo-400"

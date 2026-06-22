@@ -86,7 +86,7 @@ const PersonOfInterest = () => {
 
       <div className="align-center relative mb-2 mt-3 flex justify-center">
         <div className="mt-16 w-screen px-3 md:px-9 lg:px-12">
-          <div className="flex items-center justify-between">
+          <div className="my-4 flex items-center justify-between">
             <Searchbox search={search} setSearch={setSearch} />
 
             <AddPersonModal

@@ -3,7 +3,7 @@ import { FiSearch } from "react-icons/fi";
 export const Searchbox = ({ search, setSearch }) => {
   return (
     <div className="flex justify-end">
-      <div className="relative mb-4 w-[200px] md:w-[400px]">
+      <div className="relative w-[200px] md:w-[400px]">
         <input
           type="text"
           value={search}
